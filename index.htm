@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADE Informatique - Solutions Delphi & Services Bureautiques</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Roboto', sans-serif; line-height: 1.6; color: #333; background-color: #f9f9f9; }
+
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; font-weight: 600; color: #2d1b69; margin-bottom: 0.8rem; }
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.8rem; position: relative; padding-bottom: 8px; }
+        h2:after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 50px; height: 3px;
+            background: linear-gradient(90deg, #8a2be2, #ffd700); border-radius: 2px;
+        }
+
+        .container { width: 92%; max-width: 1100px; margin: 0 auto; padding: 0 15px; }
+        section { padding: 80px 0; } 
+        .section-title-center { text-align: center; margin-bottom: 30px; }
+        .section-title-center h2:after { left: 50%; transform: translateX(-50%); }
+
+        /* ===== BOUTONS ===== */
+        .btn {
+            display: inline-block; padding: 12px 24px;
+            background: linear-gradient(135deg, #8a2be2, #6a11cb);
+            color: white !important; border-radius: 5px; font-weight: 500;
+            text-transform: uppercase; font-size: 0.9rem; transition: all 0.3s ease;
+            border: none; cursor: pointer; text-decoration: none; font-family: 'Poppins', sans-serif;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3); }
+        .btn-secondary { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #333 !important; }
+        
+        /* Bouton vert pour les témoignages */
+        .btn-success { background: linear-gradient(135deg, #28a745, #218838); color: white !important; }
+        .btn-success:hover { box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3); }
+
+        .btn-whatsapp-active {
+            display: inline-flex; align-items: center; gap: 8px;
+            background-color: #25D366; color: white !important;
+            padding: 10px 18px; border-radius: 5px; font-weight: bold;
+            text-decoration: none; margin-top: 10px; transition: 0.3s;
+        }
+        .btn-whatsapp-active:hover { background-color: #128C7E; transform: scale(1.03); }
+
+        /* ===== HEADER & NAVIGATION ===== */
+        header { background-color: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; }
+        
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo-icon {
+            width: 40px; height: 40px; background: linear-gradient(135deg, #8a2be2, #ffd700);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem; font-weight: bold; margin-right: 10px;
+        }
+        .logo-container { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-text { font-size: 1.3rem; font-weight: 700; color: #2d1b69; }
+        .logo-text span { color: #8a2be2; }
+        .logo-subtext { color: red; font-size: 10px; font-weight: bold; text-transform: uppercase; align-self: flex-end; letter-spacing: 1px; }
+
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 20px; }
+        nav ul li a { 
+            font-weight: 500; color: #333; text-decoration: none; font-size: 0.95rem; 
+            padding: 5px 0; border-bottom: 2px solid transparent; transition: 0.3s;
+        }
+        nav ul li a.active { color: #8a2be2; border-bottom: 2px solid #8a2be2; font-weight: 700; }
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #2d1b69; }
+
+        /* ===== HERO ===== */
+        .hero { background: linear-gradient(135deg, rgba(138, 43, 226, 0.08), rgba(255, 215, 0, 0.05)); padding: 150px 0 80px; text-align: center; }
+        .hero h1 span { color: #8a2be2; }
+        .hero p { font-size: 1.1rem; max-width: 750px; margin: 0 auto 25px; color: #555; }
+        .hero-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+        /* ===== GRIDS ===== */
+        .services-grid, .products-grid, .locations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .service-card, .product-card, .location-card {
+            background: white; border-radius: 8px; padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;
+        }
+        .service-card:hover { transform: translateY(-5px); border-bottom: 3px solid #8a2be2; }
+        .service-icon { font-size: 1.8rem; color: #8a2be2; margin-bottom: 10px; }
+
+        /* ===== CONTACT ===== */
+        .contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 30px; }
+        .contact-info { display: flex; flex-direction: column; gap: 25px; }
+        .contact-item { display: flex; gap: 15px; align-items: flex-start; }
+        .contact-icon { 
+            width: 45px; height: 45px; background: #8a2be2; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; 
+            color: white; flex-shrink: 0; font-size: 1.2rem;
+        }
+        .contact-details h3 { font-size: 1.1rem; margin-bottom: 5px; color: #2d1b69; }
+        .contact-details p { font-size: 0.95rem; color: #555; margin-bottom: 5px; }
+        
+        .contact-form { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 5px; font-size: 0.9rem; }
+        .form-control { 
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; 
+            font-family: inherit; font-size: 100%; transition: 0.3s;
+        }
+        .form-control:focus { outline: none; border-color: #8a2be2; box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1); }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials { background-color: #f0f2f5; }
+        .testimonial-card { background: white; padding: 20px; border-radius: 10px; font-style: italic; position: relative; }
+        .testimonial-card::before { content: '"'; font-size: 4rem; color: rgba(138, 43, 226, 0.1); position: absolute; top: -10px; left: 10px; }
+        .testimonial-author { display: block; margin-top: 15px; font-weight: bold; font-style: normal; color: #2d1b69; }
+
+        /* ===== FOOTER ===== */
+        footer { background: #2d1b69; color: white; padding: 40px 0 20px; text-align: center; }
+        .copyright { font-size: 0.85rem; opacity: 0.8; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+
+        @media (max-width: 992px) {
+            .mobile-menu-btn { display: block; }
+            nav { display: none; width: 100%; position: absolute; top: 60px; left: 0; background: white; padding: 20px; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+            nav.active { display: block; }
+            nav ul { flex-direction: column; }
+            nav ul li { margin: 15px 0 0 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">A</div>
+                <div class="logo-container">
+                    <div class="logo-text">ADE <span>Informatique</span></div>
+                    <div class="logo-subtext">Féli~Adé</div>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#produits" class="nav-link">Produits</a></li>
+                    <li><a href="#localisation" class="nav-link">Localisation</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="accueil">
+        <div class="container">
+            <h1>Solutions <span>Informatiques</span> & Services Bureautiques</h1>
+            <p>Spécialiste en développement Delphi, création de sites web et applications sur mesure à <strong>Abomey-Calavi</strong> et à <strong>Kétou</strong>.</p>
+            <div class="hero-btns">
+                <a href="#services" class="btn btn-secondary">Nos services</a>
+                <a href="#contact" class="btn">Nous contacter</a>
+                <a href="#temoignages" class="btn btn-success">Nos clients témoignent</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Nos Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-copy service-icon"></i>
+                    <h3>Photocopie Couleur</h3>
+                    <p>Qualité professionnelle pour tous vos documents et travaux de bureautique.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-code service-icon"></i>
+                    <h3>Développement Web</h3>
+                    <p>Conception de sites vitrines et plateformes web modernes et réactifs.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-laptop-code service-icon"></i>
+                    <h3>Applications Delphi</h3>
+                    <p>Logiciels de gestion robustes et personnalisés développés avec Delphi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="produits" style="background-color: #f0f2f5;">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Nos Produits</h2>
+            </div>
+            <div class="products-grid">
+                <div class="product-card"><h3>EducSoft Pro</h3><p>Gestion optimisée des notes et bulletins scolaires.</p></div>
+                <div class="product-card"><h3>Dictaphone</h3><p>Solution de saisie vocale intelligente.</p></div>
+                <div class="product-card"><h3>Oriki Media</h3><p>Valorisation numérique des panégyriques africaines.</p></div>
+                <div class="product-card"><h3>Boutique</h3><p>Vente de matériels informatiques et consommables de qualité.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="localisation">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Où nous trouver ?</h2>
+            </div>
+            <div class="locations-grid">
+                <div class="location-card">
+                    <i class="fas fa-map-marker-alt service-icon"></i>
+                    <h3>Abomey-Calavi</h3>
+                    <p>Zone Zokpa et Gbétagbo Allo Dalomè (Akassato).</p>
+                </div>
+                <div class="location-card">
+                    <i class="fas fa-university service-icon"></i>
+                    <h3>Kétou (Plateau)</h3>
+                    <p>Au bord du goudron, contre la clôture du CEG 1 Kétou.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background-color: #f0f2f5;">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Contactez-nous</h2>
+            </div>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="contact-details">
+                            <h3>Téléphone Mobile</h3>
+                            <p>+229 01 92 99 87 87</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-details">
+                            <h3>WhatsApp</h3>
+                            <p>+229 01 61 30 40 04</p>
+                            <a href="https://wa.me/2290161304004?text=Bonjour%20ADE%20Informatique" class="btn-whatsapp-active" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Discuter en direct
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>oyedokoufelicien@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/mzdbyaew" method="POST">
+                        <div class="form-group">
+                            <label>Nom complet</label>
+                            <input type="text" name="nom" class="form-control" placeholder="Ex: Jean Dupont" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email / Téléphone</label>
+                            <input type="text" name="contact" class="form-control" placeholder="Comment vous joindre ?" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Votre message</label>
+                            <textarea name="message" class="form-control" rows="4" placeholder="Décrivez votre besoin..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width:100%">Envoyer ma demande</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="temoignages" class="testimonials">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>Ce que nos clients disent</h2>
+            </div>
+            <div class="services-grid">
+                <div class="testimonial-card">
+                    "Un service de photocopie rapide et de qualité à Kétou. Je recommande pour le sérieux."
+                    <span class="testimonial-author">- Élève du CEG 1 Kétou</span>
+                </div>
+                <div class="testimonial-card">
+                    "EducSoft Pro a vraiment facilité la gestion de nos bulletins scolaires. Un gain de temps énorme !"
+                    <span class="testimonial-author">- Directeur du CEG</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p><strong>ADE Informatique - Féli~Adé</strong></p>
+            <div class="copyright">&copy; 2023-2025 ADE Informatique. Tous droits réservés.</div>
+        </div>
+    </footer>
+
+    <script>
+        // MENU MOBILE
+        const btn = document.getElementById('mobileMenuBtn');
+        const nav = document.getElementById('mainNav');
+        btn.addEventListener('click', () => nav.classList.toggle('active'));
+
+        // GESTION DU BOUTON ACTIF AU SCROLL
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // Fermeture menu mobile au clic
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => nav.classList.remove('active'));
+        });
+    </script>
+</body>
+</html>
